@@ -1,4 +1,3 @@
-# Import CSV file and set path to file
 import os
 import csv
 
@@ -8,10 +7,8 @@ with open(csvpath, newline='') as csvfile:
 
     poll_read = csv.reader(csvfile, delimiter=',')
 
-    # Skip header
     csv_header = next(poll_read)
 
-    # Set Variables
     voteTotal = 0
     voteKhan = 0
     voteCorrey = 0
@@ -19,10 +16,9 @@ with open(csvpath, newline='') as csvfile:
     voteOTooley = 0
 
     for rows in poll_read:
-        # Add to total vote count
+        
         voteTotal = voteTotal + 1
 
-        # Add to each candidate's vote count
         if rows[2] == 'Khan':
             voteKhan = voteKhan + 1
         elif rows[2] == 'Correy':
@@ -32,13 +28,11 @@ with open(csvpath, newline='') as csvfile:
         elif rows[2] == "O'Tooley":
             voteOTooley = voteOTooley + 1
 
-# Calculate percentages
 percentKhan = voteKhan / voteTotal * 100
 percentCorrey = voteCorrey / voteTotal * 100
 percentLi = voteLi / voteTotal * 100
 percentOTooley = voteOTooley / voteTotal * 100
 
-# Determine Winner
 if voteKhan > voteCorrey:
     if voteKhan > voteLi:
         if voteKhan > voteOTooley:
@@ -55,8 +49,7 @@ else:
             winner = "O'Tooley"
     elif voteCorrey > voteOTooley:
         winner = "Li"
-
-# Display results
+        
 print("Election Results")
 print("-------------------------")
 print(f"Total Votes: {voteTotal}")
@@ -69,7 +62,6 @@ print("-------------------------")
 print(f"Winner: {winner}")
 print("-------------------------")
 
-# Export results
 with open("Output.txt", "w") as text_file:
     print("Election Results", file=text_file)
     print("-------------------------", file=text_file)
